@@ -12,8 +12,37 @@
 每一个 Vuex 应用的核心就是 store（仓库）
 
 1. Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新
-
 2. 不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地**提交 (commit) mutation**。这样使得我们可以方便地跟踪每一个状态的变化
+
+```html
+<template>
+  <div>
+    <button @click="countDecrement(5)">-</button>
+    {{count}}
+    <button @click="countIncrement">+</button>
+  </div>
+</template>
+```
+
+
+
+```js
+  methods: {
+    ...mapMutations(['countDecrement', 'countIncrement'])
+
+    // decrement () {
+    //   // 提交一个countDecrement这么一个mutation 
+    //   // 这个mutaion在store的实例里定义的
+    //   this.$store.commit('countDecrement', 5)
+    //   // this.$store.state.count--
+    // },
+    // increment () {
+    //   this.$store.commit('countIncrement')
+    // }
+  }
+```
+
+
 
 # state
 
@@ -243,7 +272,15 @@ import { SOME_MUTATION } from './mutation-types'
 const store = new Vuex.Store({
   state: { ... },
   mutations: {
+      
+      // conutDecrement () {
+      // }
+      // mutations.conutDecrement()
+      // mutations['conutDecrement']()
+	  // mutations[COUNT_DECRRMENT]()
+
     // 我们可以使用 ES2015 风格的计算属性命名功能来使用一个常量作为函数名
+    // 一般自己const 定义的常量大写
     [SOME_MUTATION] (state) {
       // mutate state
     }
@@ -350,7 +387,8 @@ export default {
       'increment', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
 
       // `mapActions` 也支持载荷：
-      'incrementBy' // 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch('incrementBy', amount)`
+      'incrementBy' // 将 `this.incrementBy(amount)` 映射为 
+       `this.$store.dispatch('incrementBy', amount)` // 手动提交action
     ]),
     ...mapActions({
       add: 'increment' // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
