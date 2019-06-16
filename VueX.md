@@ -464,7 +464,48 @@ store.state.a // -> moduleA 的状态
 store.state.b // -> moduleB 的状态
 ```
 
-# 什么是Promise
+# subscribe 
+
+```
+subscribe(handler: Function): Function
+```
+
+订阅 store 的 mutation。`handler` 会在每个 mutation 完成后调用，接收 mutation 和经过 mutation 后的状态作为参数：
+
+```js
+store.subscribe((mutation, state) => {
+  console.log(mutation.type)
+  console.log(mutation.payload)
+})
+```
+
+# subscribeAction
+
+subscribeAction(handler: Function): Function
+2.5.0 新增
+
+订阅 store 的 action。`handler` 会在每个 action 分发的时候调用并接收 action 描述和当前的 store 的 state 这两个参数：
+
+```js
+store.subscribeAction((action, state) => {
+  console.log(action.type)
+  console.log(action.payload)
+})
+```
+
+# event
+
+默认值: `'click'`
+
+声明可以用来触发导航的事件。可以是一个字符串或是一个包含字符串的数组
+
+# mixins
+
+`mixins` 选项接受一个混入对象的数组。
+
+mixins里面的方法会和每一个组件合并
+
+# 什么是Promi!se
 
 Promise对象用于异步操作，它表示一个尚未完成且预计在未来完成的异步操作
 

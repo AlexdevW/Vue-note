@@ -49,3 +49,30 @@ width: auto;
 border-width: 0 1px;
 ```
 
+### 去掉input type=number时输入框内的上下箭头
+
+```
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
+}
+```
+
+### 限制 `input` 输入框只能输入纯数字
+
+```js
+只能输入纯数字的输入框:<input type="text" name="" oninput="value=value.replace(/[^\d]/g,'')">
+```
+
+#### input不能为空，不能以0开头，只能是纯数字
+
+```js
+let val = this.$refs.input.value  // <input> type属性为Number
+if (val < 1 || val.startsWith(0)) this.$refs.input.value = this.count
+```
+
+
+
